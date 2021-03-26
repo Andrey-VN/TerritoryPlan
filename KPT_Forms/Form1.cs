@@ -65,14 +65,22 @@ namespace KPT_Forms
         /// <param name="e"></param>
         private void button7_Click(object sender, EventArgs e)
         {
-            int index = dataGridView1.SelectedRows[0].Index;
-            string cadastralNumber = dataGridView1[0, index].Value.ToString();
-            string nameRows = dataGridView1.Columns[0].Name;
-            if (cadastralNumber == null & nameRows == null)
-                return;
+            try
+            {
+                int index = dataGridView1.SelectedRows[0].Index;
+                string cadastralNumber = dataGridView1[0, index].Value.ToString();
+                string nameRows = dataGridView1.Columns[0].Name;
+                if (cadastralNumber == null & nameRows == null)
+                    return;
 
-            GetXmlToText getXmlToText = GetXmlToText.Create(nameRows);
-            richTextBox1.Text = getXmlToText.GetItem(xdoc, cadastralNumber);
+                GetXmlToText getXmlToText = GetXmlToText.Create(nameRows);
+                richTextBox1.Text = getXmlToText.GetItem(xdoc, cadastralNumber);
+            }
+            catch
+            {
+                MessageBox.Show("Объект не выбран.");
+            }
+
         }
 
         /// <summary>
